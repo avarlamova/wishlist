@@ -4,13 +4,15 @@ import { Provider } from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 import App from './components/app.js';
-import WishlistService, {WishlistServiceProvider} from './services/wishlistservice.js';
-import store from './store.js';
+import {WishlistServiceProvider} from './contexts/wishlist-context';
+import WishlistService from './services/wishlistservice.js';
+import store from './store';
 
+const wishlistService = new WishlistService();
 
 ReactDOM.render(
     <Provider store={store}>
-        <WishlistServiceProvider value={'dd'}>
+        <WishlistServiceProvider value={wishlistService}>
             <Router>
                 <App />
             </Router>

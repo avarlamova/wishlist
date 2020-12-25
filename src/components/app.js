@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import withWishlistService from './hoc/with-wishlistservice';
 
-export default function App() {
+const App = ({wishlistService}) => {
     return (
         <div>
 {            'app'
 }        </div>
     )
 }
+
+export default withWishlistService()(App)

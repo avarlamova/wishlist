@@ -5,6 +5,7 @@ const wishlistLoaded = (newWishlist) => {
     }
 }
 
-export {
-    wishlistLoaded
-}
+export {wishlistLoaded}
+
+
+//переделать в рфс?
