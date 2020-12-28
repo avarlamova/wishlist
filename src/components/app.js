@@ -1,12 +1,15 @@
 import React from 'react';
-import withWishlistService from './hoc/with-wishlistservice';
+import { Route, Switch} from 'react-router-dom';
+import HomePage from '../components/pages/homepage';
+import WishlistPage from '../components/pages/wishlist-page';
 
-const App = ({wishlistService}) => {
+const App = () => {
     return (
-        <div>
-{            'app'
-}        </div>
+        <Switch>
+            <Route path = "/" component={HomePage} exact/>
+            <Route path = "/list" component={WishlistPage} />
+        </Switch>
     )
 }
 
-export default withWishlistService()(App)
+export default App
