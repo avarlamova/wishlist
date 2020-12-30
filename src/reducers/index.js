@@ -1,5 +1,14 @@
 const initialState = {
-    wishes: []
+    wishes: [
+        {
+            name: '1',
+            picture: '1',
+        },
+        {
+            name: '2',
+            picture: '2',
+        }
+    ]
 };
 
 const reducer = (state = initialState, action) => {

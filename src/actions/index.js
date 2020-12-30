@@ -6,6 +6,3 @@ const wishlistLoaded = (newWishlist) => {
 }
 
 export {wishlistLoaded}
-
-
-//переделать в рфс?

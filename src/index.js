@@ -5,7 +5,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 
 import App from './components/app.js';
 import {WishlistServiceProvider} from './contexts/wishlist-context';
-import WishlistService from './services/wishlistservice.js';
+import WishlistService from './services/wishlistservice';
 import store from './store';
 
 const wishlistService = new WishlistService();

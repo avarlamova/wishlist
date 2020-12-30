@@ -1,6 +1,4 @@
-import React, { Component } from 'react'
-
-export default class Wishlistservice extends Component {
+export default class Wishlistservice  {
     
     getWishlist() {
         return []; 
