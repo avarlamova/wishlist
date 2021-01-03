@@ -1,4 +1,5 @@
 import React from 'react';
+import './wishlist-item.css';
 
 export default function BooklistItem({wish}) {
     
@@ -10,7 +11,7 @@ export default function BooklistItem({wish}) {
           {name}
       </div>
 
-      <img>{picture}</img>
+      <img src={picture} alt='cover image' />
       </>
     )
 }
