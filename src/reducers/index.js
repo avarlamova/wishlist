@@ -7,20 +7,20 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case 'WISHLIST_LOADED': 
+        case 'FETCH_WISHLIST_SUCCESS': 
             return {
                 wishes: action.payLoad,
                 loading: false,
                 error: null,
             };
-        case 'WISHLIST_REQUESTED':
+        case 'FETCH_WISHLIST_REQUEST':
             return {
                 wishes: [],
                 loading: true,
                 error: null,
             };
 
-        case 'LOADING_ERROR':
+        case 'FETCH_WISHLIST_FAILURE':
             return {
                 wishes: [],
                 loading: false,

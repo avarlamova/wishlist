@@ -1,23 +1,28 @@
 import React, { Component } from 'react'
 import WishlistItem from '../wishlist-item/wishlist-item';
 import { connect } from 'react-redux';
-import { wishlistLoaded, wishlistRequested, loadingError } from '../../actions/index';
+import { fetchWishlist } from '../../actions/index';
 import withWishlistService from '../hoc/with-wishlistservice';
 import compose  from '../../utilities/compose';
 import Spinner from '../loading-spinner/spinner';
 import ErrorIndicator from '../error-indicator/error-indicator';
 
+const Wishlist = ({wishes}) => {
+    return (
+        <ul>
+            {wishes.map((wish)=> {
+            return (
+                <li key={wish.name}><WishlistItem wish = {wish}/></li>
+            )    
+            })}
+        </ul>
+    )
+}
 
-class Wishlist extends Component {
+class WishlistContainer extends Component {
     
     componentDidMount(){
-        const {wishlistService, wishlistLoaded, wishlistRequested, loadingError} = this.props;
-
-        wishlistRequested();
-        wishlistService.getWishlist().then((data)=> {
-            wishlistLoaded(data)
-        })
-        .catch((error)=> loadingError(error));
+        this.props.fetchWishlist();
     }
     
     render() {
@@ -31,16 +36,7 @@ class Wishlist extends Component {
         if (error) {
             return <ErrorIndicator />
         }
-
-        return (
-            <ul>
-                {wishes.map((wish)=> {
-                return (
-                    <li key={wish.name}><WishlistItem wish = {wish}/></li>
-                )    
-                })}
-            </ul>
-        )
+        return <Wishlist wishes={wishes} />
     }
 }
 
@@ -48,14 +44,14 @@ const mapStateToProps = ({wishes, loading, error}) => {
     return { wishes, loading, error }
 }
 
-const mapDispatchToProps = {
-    wishlistLoaded,
-    wishlistRequested,
-    loadingError,
+const mapDispatchToProps = (dispatch, {wishlistService}) => {
+    return {
+    fetchWishlist: fetchWishlist(wishlistService, dispatch)
+    }
   };
 
   export default compose(
     withWishlistService(),
     connect(mapStateToProps, mapDispatchToProps)
-  )(Wishlist);
+  )(WishlistContainer);
   
