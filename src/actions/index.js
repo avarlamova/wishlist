@@ -20,6 +20,13 @@ const loadingError = (error) => {
     }
 }
 
+const wishAddedToCart = (wishId) => {
+    return {
+        type: 'WISH_ADDED_TO_CART',
+        payLoad: wishId
+    }
+}
+
 const fetchWishlist = (wishlistService, dispatch) => () => {
     dispatch(wishlistRequested());
     wishlistService.getWishlist()
@@ -27,4 +34,4 @@ const fetchWishlist = (wishlistService, dispatch) => () => {
       .catch((error) => dispatch(loadingError(error)));
   };
 
-export {fetchWishlist}
+export {fetchWishlist, wishAddedToCart}
