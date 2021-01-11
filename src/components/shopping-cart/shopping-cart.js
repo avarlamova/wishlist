@@ -6,7 +6,12 @@ const ShoppingCart = ({items, total, onIncrease, onDecrease, onDelete}) => {
         <>
         <div> Shopping cart </div>
         <table>
-            <thead> Your order</thead>
+            <thead> 
+                <tr>
+                <td> Your order </td>
+                </tr>
+                
+            </thead>
             <tbody>
                 {items.map((item, index)=> {
                     const {id, title, count, total} = item;

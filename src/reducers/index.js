@@ -38,18 +38,41 @@ const reducer = (state = initialState, action) => {
 
         case 'WISH_ADDED_TO_CART': 
             const wishId = action.payLoad;
-            const wish = state.wishes.find((wish)=>wish.id===wishId);
-            const newItem = {
+            const wish = state.wishes.find((wish)=>wish.id === wishId);
+            
+            const itemIndex=state.cartItems.findIndex(({id}) => id === wishId)
+            const item = state.cartItems[itemIndex];
+            let newItem;
+            if (item) {
+                newItem = {
+                    ...item,
+                    count: item.count+1,
+                    total: item.total+wish.price
+                }
+            } else {
+                newItem = {
                 id: wish.id,
-                name: wish.title,
+                title: wish.title,
                 count: 1,
                 total: wish.price
-            };
-            return {
-                ...state, 
-                cartItems: [...state.cartItems, newItem]
             }
-
+            
+            if (itemIndex === -1) {
+                return {
+                    ...state, 
+                    cartItems: [...state.cartItems, newItem]
+                }
+            }
+            else {
+                return {
+                    ...state,
+                    cartItems: [...state.cartItems.slice(0,itemIndex),
+                    newItem,
+                    ...state.cartItems.slice(itemIndex+1)
+                ]
+                }
+            }
+        }
     default:
         return state;
     }
