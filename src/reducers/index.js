@@ -6,6 +6,54 @@ const initialState = {
     orderTotal: 220
 };
 
+const updateCartItems = (cartItems, item, idx) => {
+
+    if (idx === -1) {
+      return [
+        ...cartItems,
+        item
+      ];
+    }
+  
+    return [
+      ...cartItems.slice(0, idx),
+      item,
+      ...cartItems.slice(idx + 1)
+    ];
+  };
+  
+  const updateCartItem = (wish, item = {}) => {
+  
+    const {
+      id = wish.id,
+      count = 0,
+      title = wish.title,
+      total = 0 } = item;
+  
+    return {
+      id,
+      title,
+      count: count + 1,
+      total: total + wish.price
+    };
+  };
+
+  const deleteCartItem = (wish, item = {}) => {
+  
+    const {
+      id = wish.id,
+      count = 0,
+      title = wish.title,
+      total = 0 } = item;
+  
+    return {
+      id,
+      title,
+      count: 0,
+      total: total + wish.price
+    };
+  };
+  
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
@@ -42,37 +90,27 @@ const reducer = (state = initialState, action) => {
             
             const itemIndex=state.cartItems.findIndex(({id}) => id === wishId)
             const item = state.cartItems[itemIndex];
-            let newItem;
-            if (item) {
-                newItem = {
-                    ...item,
-                    count: item.count+1,
-                    total: item.total+wish.price
-                }
-            } else {
-                newItem = {
-                id: wish.id,
-                title: wish.title,
-                count: 1,
-                total: wish.price
-            }
+            const newItem = updateCartItem(wish, item);
+            return {
+              ...state,
+              cartItems: updateCartItems(state.cartItems, newItem, itemIndex)
+            };
+
+        case 'WISH_REMOVED_FROM_CART': 
+       
+        return {
+          ...state,
+          cartItems: updateCartItems(state.cartItems, itemIndex)
+        };
             
-            if (itemIndex === -1) {
-                return {
-                    ...state, 
-                    cartItems: [...state.cartItems, newItem]
-                }
-            }
-            else {
-                return {
-                    ...state,
-                    cartItems: [...state.cartItems.slice(0,itemIndex),
-                    newItem,
-                    ...state.cartItems.slice(itemIndex+1)
-                ]
-                }
-            }
-        }
+
+        case 'ALL_REMOVED_FROM_CART':
+            let newRemoved = deleteCartItem(wish,item);
+            return {
+                ...state,
+                cartItems: updateCartItems(state.cartItems, newRemoved, itemIndex)
+              };
+         
     default:
         return state;
     }

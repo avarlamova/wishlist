@@ -1,4 +1,5 @@
 import React from 'react';
+import {wishAddedToCart, wishRemovedFromCart, allRemovedFromCart} from '../../actions/index';
 import {connect} from 'react-redux';
 
 const ShoppingCart = ({items, total, onIncrease, onDecrease, onDelete}) => {
@@ -22,13 +23,13 @@ const ShoppingCart = ({items, total, onIncrease, onDecrease, onDelete}) => {
                     <td>{count} </td>
                     <td> ${total} </td>
                     <td>
-                        <button onClick={()=>onIncrease(id)}></button>
+                        <button onClick={() => onIncrease(id)}>+</button>
                     </td>
                     <td>
-                        <button onClick={()=>onDecrease(id)}></button>
+                        <button onClick={() => onDecrease(id)}>-</button>
                     </td>
                     <td>
-                        <button onClick={()=>onDelete(id)}></button>
+                        <button onClick={() => onDelete(id)}>Delete</button>
                     </td>
                     </tr>
                     )
@@ -44,12 +45,8 @@ const mapStateToProps = ({cartItems, orderTotal}) => {
     return { items: cartItems, total: orderTotal}
 }
 
-const mapDispatchToProps = () => { 
-    return {
-        onIncrease: (id) => { console.log('increase')},
-        onDecrease: (id) => { console.log('decrease')},
-        onDelete: (id) => { console.log('deleted')}
-    }
+const mapDispatchToProps = { 
+    onIncrease: wishAddedToCart, onDecrease: wishRemovedFromCart, onDelete: allRemovedFromCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)

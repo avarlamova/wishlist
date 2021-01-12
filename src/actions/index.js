@@ -27,6 +27,20 @@ const wishAddedToCart = (wishId) => {
     }
 }
 
+const wishRemovedFromCart = (wishId) => {
+    return {
+        type: 'WISH_REMOVED_FROM_CART',
+        payLoad: wishId
+    }
+}
+
+const allRemovedFromCart = (wishId) => {
+    return {
+        type: 'ALL_REMOVED_FROM_CART',
+        payLoad: wishId
+    }
+}
+
 const fetchWishlist = (wishlistService, dispatch) => () => {
     dispatch(wishlistRequested());
     wishlistService.getWishlist()
@@ -34,4 +48,4 @@ const fetchWishlist = (wishlistService, dispatch) => () => {
       .catch((error) => dispatch(loadingError(error)));
   };
 
-export {fetchWishlist, wishAddedToCart}
+export {fetchWishlist, wishAddedToCart, wishRemovedFromCart, allRemovedFromCart}
