@@ -1,16 +1,19 @@
 import React from 'react';
 import './wishlist-item.css';
 
-export default function BooklistItem({wish, onAddedToCart}) {
-    
-    const {title, picture, price} = wish;
+const WishlistItem = ({ wish, onAddedToCart }) => {
+  const { title, price, picture } = wish;
+  return (
+<>
+        <span className="wish-title">{title}</span>
+        <div className="wish-price">${price}</div>
+        <img  alt='' src={picture}></img>
+        <button
+          onClick={onAddedToCart}>
+          Add to cart
+        </button>
+    </>
+  );
+};
 
-    return (
-        <>
-      <div>{title}</div>
-      <img src={picture} alt='cover image' />
-      <div> {price} </div>
-      <button onClick = {onAddedToCart}> Add to cart </button>
-      </>
-    )
-}
+export default WishlistItem;

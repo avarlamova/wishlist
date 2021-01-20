@@ -7,7 +7,6 @@ import ShoppingCart from '../shopping-cart/shopping-cart';
     return (
          <div>
              <Wishlist/>
-             <ShoppingCart />
          </div>
      )
  }

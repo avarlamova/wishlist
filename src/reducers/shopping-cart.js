@@ -1,24 +1,24 @@
 const updateCartItems = (cartItems, item, idx) => {
 
-    if (item.count === 0) {
-      return [
-        ...cartItems.slice(0, idx),
-        ...cartItems.slice(idx + 1)
-      ];
-    }
-  
-    if (idx === -1) {
-      return [
-        ...cartItems,
-        item
-      ];
-    }
-  
+  if (item.count === 0) {
     return [
       ...cartItems.slice(0, idx),
-      item,
       ...cartItems.slice(idx + 1)
     ];
+  }
+
+  if (idx === -1) {
+    return [
+      ...cartItems,
+      item
+    ];
+  }
+
+  return [
+    ...cartItems.slice(0, idx),
+    item,
+    ...cartItems.slice(idx + 1)
+  ];
 };
 
 const updateCartItem = (wish, item = {}, quantity) => {
@@ -40,12 +40,13 @@ const updateCartItem = (wish, item = {}, quantity) => {
 const updateOrder = (state, wishId, quantity) => {
     const { wishes, cartItems } = state;
   
-    const wish = wishes.find((wish)=>wish.id === wishId);
+    const wish = wishes.find(({id}) => id === wishId);
     const itemIndex = cartItems.findIndex(({id}) => id === wishId)
     const item = cartItems[itemIndex];
     const newItem = updateCartItem(wish, item, quantity);
     return {
-    ...state,cartItems: updateCartItems(cartItems, newItem, itemIndex)};
+      orderTotal: 0,
+      cartItems: updateCartItems(cartItems, newItem, itemIndex)};
   };
 
 const updateShoppingCart = (state, action) => {
@@ -64,7 +65,7 @@ const updateShoppingCart = (state, action) => {
     case 'WISH_REMOVED_FROM_CART':
       return updateOrder(state, action.payload, -1);
 
-    case 'ALL_WISHES_REMOVED_FROM_CART':
+    case 'ALL_REMOVED_FROM_CART':
       const item = state.shoppingCart.cartItems.find(({id}) => id === action.payload);
       return updateOrder(state, action.payload, -item.count);
 

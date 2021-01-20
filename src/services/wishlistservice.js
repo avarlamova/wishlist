@@ -1,4 +1,4 @@
-export default class Wishlistservice  {
+export default class WishlistService  {
     
     data = [
         {
