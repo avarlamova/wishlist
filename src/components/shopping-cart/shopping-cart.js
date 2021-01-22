@@ -1,58 +1,55 @@
 import React from 'react';
-import {wishAddedToCart, wishRemovedFromCart, allRemovedFromCart} from '../../actions/index';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { wishAddedToCart, wishRemovedFromCart, allRemovedFromCart } from '../../actions';
 
 const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
-    const renderRow = (item, idx) => {
-      const { id, title, count, total } = item;
-      return (
-        <tr key={id}>
-          <td>{idx + 1}</td>
-          <td>{title}</td>
-          <td>{count}</td>
-          <td>${total}</td>
-          <td>
-            <button>
-              onClick={() => onDelete(id)}
-            </button>
-            <button>
-              onClick={() => onIncrease(id)}
-            </button>
-            <button
-              onClick={() => onDecrease(id)}>
-            </button>
-          </td>
-        </tr>
-      );
-    };
-  
+  const renderRow = (item, idx) => {
+    const { id, title, count, total } = item;
     return (
-      <div>
-        <h2>Your Order</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Item</th>
-              <th>Count</th>
-              <th>Price</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-  
-          <tbody>
-          { items.map(renderRow) }
-          </tbody>
-        </table>
-  
-        <div className="total">
-          Total: ${total}
-        </div>
-      </div>
+      <tr key={id}>
+        <td>{idx + 1}</td>
+        <td>{title}</td>
+        <td>{count}</td>
+        <td>${total}</td>
+        <td>
+          <button onClick={() => onIncrease(id)}> +
+          </button>
+          <button
+            onClick={() => onDecrease(id)}> -
+          </button>
+          <button
+            onClick={() => onDelete(id)}> Delete
+          </button>
+        </td>
+      </tr>
     );
   };
-  
-//подключение к Redux
+
+  return (
+      <>
+      <h2>Your Order</h2>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Wish</th>
+            <th>Count</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        { items.map(renderRow) }
+        </tbody>
+      </table>
+
+      <div className="total">
+        Total: ${total}
+      </div>
+    </>
+  );
+};
+
 const mapStateToProps = ({ cartItems, orderTotal }) => {
   return {
     items: cartItems,
@@ -60,8 +57,9 @@ const mapStateToProps = ({ cartItems, orderTotal }) => {
   };
 };
 
-const mapDispatchToProps = { 
-    onIncrease: wishAddedToCart, onDecrease: wishRemovedFromCart, onDelete: allRemovedFromCart
-}
+const mapDispatchToProps = () => {
+  return {
+    onIncrease: wishAddedToCart, onDecrease: wishRemovedFromCart, onDelete: allRemovedFromCart}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
