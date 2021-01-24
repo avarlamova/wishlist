@@ -1,17 +1,16 @@
+const wishlistRequested = () => {
+  return {
+    type: 'FETCH_WISHLIST_REQUEST'
+  }
+};
 
-const wishlistLoaded = (newWishlist) => {
-    return {
-      type: 'FETCH_WISHLIST_SUCCESS',
-      payload: newWishlist
-    };
+const wishlistLoaded = (newWishes) => {
+  return {
+    type: 'FETCH_WISHLIST_SUCCESS',
+    payload: newWishes,
   };
+};
 
-  const wishlistRequested = () => {
-    return {
-      type: 'FETCH_WISHLIST_REQUEST',
-    };
-  };
-  
 const loadingError = (error) => {
   return {
     type: 'FETCH_WISHLIST_FAILURE',
@@ -29,16 +28,16 @@ export const wishAddedToCart = (wishId) => {
 export const wishRemovedFromCart = (wishId) => {
   return {
     type: 'WISH_REMOVED_FROM_CART',
-    payLoad: wishId
-  }
-}
+    payload: wishId
+  };
+};
 
 export const allRemovedFromCart = (wishId) => {
   return {
     type: 'ALL_REMOVED_FROM_CART',
-    payLoad: wishId
-  }
-}
+    payload: wishId
+  };
+};
 
 const fetchWishlist = (wishlistService, dispatch) => () => {
   dispatch(wishlistRequested());
@@ -47,7 +46,6 @@ const fetchWishlist = (wishlistService, dispatch) => () => {
     .catch((err) => dispatch(loadingError(err)));
 };
 
-  export {
-    fetchWishlist
-  };
-
+export {
+  fetchWishlist
+};

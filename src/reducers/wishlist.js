@@ -31,7 +31,7 @@ const updateWishlist = (state, action) => {
       };
 
     default:
-      return state.wishList;
+      return state.wishlist;
   }
 };
 

@@ -1,19 +1,27 @@
-import React, { Component } from 'react';
-import { Route, Switch} from 'react-router-dom';
-import HomePage from '../components/pages/homepage';
-import WishlistPage from '../components/pages/wishlist-page';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import ShopHeader from '../components/shop-header/shop-header';
+import HomePage from './pages/homepage' 
+import CartPage  from './pages/wishlist-page';
 
 const App = () => {
-    return (
-        <>
-        <ShopHeader numItems={2} total={200}/>
-        <Switch>
-            <Route path = "/" component={HomePage} exact/>
-            <Route path = "/list" component={WishlistPage} />
-        </Switch>
-        </>
-    )
-}
+  return (
+    <>
+      <ShopHeader numItems={5} total={210}/>
+      <Switch>
+        <Route
+          path="/"
+          component={HomePage}
+          exact />
 
-export default App
+        <Route
+          path="/cart"
+          component={CartPage}
+          />
+      </Switch>
+    </>
+  );
+};
+
+export default App;
+

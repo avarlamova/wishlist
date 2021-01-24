@@ -22,32 +22,34 @@ const updateCartItems = (cartItems, item, idx) => {
 };
 
 const updateCartItem = (wish, item = {}, quantity) => {
-  
-    const {
-      id = wish.id,
-      count = 0,
-      title = wish.title,
-      total = 0 } = item;
-  
-    return {
-      id,
-      title,
-      count: count + quantity,
-      total: total + quantity*wish.price
-    };
+
+  const {
+    id = wish.id,
+    count = 0,
+    title = wish.title,
+    total = 0 } = item;
+
+  return {
+    id,
+    title,
+    count: count + quantity,
+    total: total + quantity*wish.price
   };
+};
 
 const updateOrder = (state, wishId, quantity) => {
-    const { wishes, cartItems } = state;
-  
-    const wish = wishes.find(({id}) => id === wishId);
-    const itemIndex = cartItems.findIndex(({id}) => id === wishId)
-    const item = cartItems[itemIndex];
-    const newItem = updateCartItem(wish, item, quantity);
-    return {
-      orderTotal: 0,
-      cartItems: updateCartItems(cartItems, newItem, itemIndex)};
+  const { wishlist: { wishes }, shoppingCart: { cartItems }} = state;
+
+  const wish = wishes.find(({id}) => id === wishId);
+  const itemIndex = cartItems.findIndex(({id}) => id === wishId);
+  const item = cartItems[itemIndex];
+
+  const newItem = updateCartItem(wish, item, quantity);
+  return {
+    orderTotal: 0,
+    cartItems: updateCartItems(cartItems, newItem, itemIndex)
   };
+};
 
 const updateShoppingCart = (state, action) => {
 

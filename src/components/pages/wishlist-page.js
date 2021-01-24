@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-export default function WishlistPage() {
-    return (
-        <div>
-            Wishlist page
-        </div>
-    )
-}
+const CartPage = () => {
+  return <div>Cart Page</div>
+};
+
+export default CartPage;

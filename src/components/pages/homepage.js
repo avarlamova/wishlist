@@ -1,14 +1,16 @@
 import React from 'react';
-import ShoppingCart from '../shopping-cart/shopping-cart';
 import Wishlist from '../wishlist/wishlist';
- 
- export default function HomePage() {
+import ShoppingCartTable from '../shopping-cart/shopping-cart';
 
-    return (
-         <>
-             <Wishlist/>
-             <ShoppingCart />
-         </>
-     )
- }
+const HomePage = () => {
+  return (
+    <div>
+      <Wishlist />
+      <ShoppingCartTable />
+    </div>
+  );
+};
+
+export default HomePage;
+
  

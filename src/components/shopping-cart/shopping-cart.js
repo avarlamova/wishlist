@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { wishAddedToCart, wishRemovedFromCart, allRemovedFromCart } from '../../actions';
 
-const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
+import {
+  wishAddedToCart,wishRemovedFromCart, allRemovedFromCart } from '../../actions';
+
+const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
   const renderRow = (item, idx) => {
     const { id, title, count, total } = item;
     return (
@@ -12,13 +14,20 @@ const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
         <td>{count}</td>
         <td>${total}</td>
         <td>
-          <button onClick={() => onIncrease(id)}> +
+          <button
+            onClick={() => onIncrease(id)}
+            className="btn btn-outline-success btn-sm float-right">
+            +
           </button>
           <button
-            onClick={() => onDecrease(id)}> -
+            onClick={() => onDecrease(id)}
+            className="btn btn-outline-warning btn-sm float-right">
+            -
           </button>
           <button
-            onClick={() => onDelete(id)}> Delete
+            onClick={() => onDelete(id)}
+            className="btn btn-outline-danger btn-sm float-right">
+            Delete
           </button>
         </td>
       </tr>
@@ -26,13 +35,13 @@ const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
   };
 
   return (
-      <>
+    <div className="shopping-cart-table">
       <h2>Your Order</h2>
       <table className="table">
         <thead>
           <tr>
-            <th>No</th>
-            <th>Wish</th>
+            <th>#</th>
+            <th>Item</th>
             <th>Count</th>
             <th>Price</th>
           </tr>
@@ -46,20 +55,21 @@ const ShoppingCart = ({ items, total, onIncrease, onDecrease, onDelete }) => {
       <div className="total">
         Total: ${total}
       </div>
-    </>
+    </div>
   );
 };
 
-const mapStateToProps = ({ cartItems, orderTotal }) => {
+const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal }}) => {
   return {
     items: cartItems,
     total: orderTotal
   };
 };
 
-const mapDispatchToProps = () => {
-  return {
-    onIncrease: wishAddedToCart, onDecrease: wishRemovedFromCart, onDelete: allRemovedFromCart}
+const mapDispatchToProps = {
+  onIncrease: wishAddedToCart,
+  onDecrease: wishRemovedFromCart,
+  onDelete: allRemovedFromCart
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable);

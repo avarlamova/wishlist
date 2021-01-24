@@ -5,10 +5,17 @@ const WishlistItem = ({ wish, onAddedToCart }) => {
   const { title, price, picture } = wish;
   return (
     <>
-      <span>{title}</span>
-      <span> ${price}</span>
-      <img src={picture}></img>
-      <button onClick={onAddedToCart}> Add to cart </button>
+      <div>
+        <img src={picture} alt=" " />
+      </div>
+      <div>
+        <span>{title}</span>
+        <div>${price}</div>
+        <button
+          onClick={onAddedToCart}
+         > Add to cart
+        </button>
+      </div>
     </>
   );
 };
