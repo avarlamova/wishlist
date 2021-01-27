@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import WishlistItem from '../wishlist-item/wishlist-item';
+import {bindActionCreators} from 'redux';
 
 import { connect } from 'react-redux';
 
@@ -51,10 +52,10 @@ const mapStateToProps = ({ wishlist: { wishes, loading, error }}) => {
 
 const mapDispatchToProps = (dispatch, { wishlistService }) => {
 
-  return {
-    fetchWishlist: fetchWishlist(wishlistService, dispatch),
-    onAddedToCart: (id) => dispatch(wishAddedToCart(id))
-  };
+  return bindActionCreators({
+    fetchWishlist: fetchWishlist(wishlistService),
+    onAddedToCart: wishAddedToCart
+  }, dispatch)
 };
 
 export default compose(

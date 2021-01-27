@@ -39,7 +39,7 @@ export const allRemovedFromCart = (wishId) => {
   };
 };
 
-const fetchWishlist = (wishlistService, dispatch) => () => {
+const fetchWishlist = (wishlistService) => () => (dispatch) => {
   dispatch(wishlistRequested());
   wishlistService.getWishlist()
     .then((data) => dispatch(wishlistLoaded(data)))
