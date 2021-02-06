@@ -27,13 +27,16 @@ const updateCartItem = (wish, item = {}, quantity) => {
     id = wish.id,
     count = 0,
     title = wish.title,
-    total = 0 } = item;
+    price = wish.price,
+    total = 0} 
+    = item;
 
   return {
     id,
     title,
+    price,
     count: count + quantity,
-    total: total + quantity*wish.price
+    total: total + quantity*wish.price,
   };
 };
 

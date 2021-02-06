@@ -1,17 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-  wishAddedToCart,wishRemovedFromCart, allRemovedFromCart } from '../../actions';
+import {wishAddedToCart,wishRemovedFromCart, allRemovedFromCart } from '../../actions';
 
 const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
+  let totalForOrder = items.map(item => item.total);
+  if (totalForOrder.length>0) {
+    totalForOrder = totalForOrder.reduce((t, a) => parseInt(t) + parseInt(a))
+  }
   const renderRow = (item, idx) => {
-    const { id, title, count, total } = item;
+    const { id, title, count, total, price } = item;
     return (
       <tr key={id}>
         <td>{idx + 1}</td>
         <td>{title}</td>
         <td>{count}</td>
+        <td>${price}</td>
         <td>${total}</td>
         <td>
           <button
@@ -44,6 +48,7 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) =
             <th>Item</th>
             <th>Count</th>
             <th>Price</th>
+            <th> Sum </th>
           </tr>
         </thead>
 
@@ -52,8 +57,8 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) =
         </tbody>
       </table>
 
-      <div className="total">
-        Total: ${total}
+      <div>
+        Total: $ {totalForOrder}
       </div>
     </div>
   );
