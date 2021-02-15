@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {wishAddedToCart,wishRemovedFromCart, allRemovedFromCart } from '../../actions';
 
-const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
+const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
   let totalForOrder = items.map(item => item.total);
   if (totalForOrder.length>0) {
     totalForOrder = totalForOrder.reduce((t, a) => parseInt(t) + parseInt(a))
@@ -64,10 +64,9 @@ const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) =
   );
 };
 
-const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal }}) => {
+const mapStateToProps = ({ shoppingCart: { cartItems }}) => {
   return {
     items: cartItems,
-    total: orderTotal
   };
 };
 

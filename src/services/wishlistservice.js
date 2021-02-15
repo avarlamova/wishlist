@@ -10,7 +10,21 @@ export default class WishlistService {
         id: 2,
         title: 'devon rex cat',
         price: 100,
-        picture: 'https://i.pinimg.com/originals/de/d4/bf/ded4bf3af97c235e56aa2b6a27c0a445.jpg'}
+        picture: 'https://i.pinimg.com/originals/de/d4/bf/ded4bf3af97c235e56aa2b6a27c0a445.jpg'},
+
+        {
+          id: 3,
+          title: 'coffee mug',
+          price: 7,
+          picture: 'https://images-na.ssl-images-amazon.com/images/I/511aSd025YL._AC_SL1000_.jpg'
+        },
+
+        {
+          id: 4,
+          title: 'perfume',
+          price: 160,
+          picture: 'https://images-na.ssl-images-amazon.com/images/I/519WuN-tjrL._AC_SX522_.jpg'
+        },
     ];
   
     getWishlist() {
