@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import { Spinner } from "react-loading-io";
 
-export default function Spinner() {
+ const LoadingSpinner = () => {
     return (
-        <div>
-            Loading...
-        </div>
-    )
+        <Spinner size={125} color={'#9933FF'}/>
+      );
 }
+
+export default LoadingSpinner

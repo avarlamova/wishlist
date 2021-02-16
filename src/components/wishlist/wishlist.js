@@ -8,12 +8,12 @@ import withWishlistService from '../hoc/with-wishlistservice';
 import { fetchWishlist, wishAddedToCart } from '../../actions';
 import compose from '../../utilities/compose';
 
-import Spinner from '../loading-spinner/spinner';
+import LoadingSpinner from '../loading-spinner/spinner';
 import ErrorIndicator from '../error-indicator/error-indicator';
 
 const Wishlist = ({ wishes, onAddedToCart }) => {
   return (
-    <ul>
+    <ul className="list-group">
       {
         wishes.map((wish) => {
           return (
@@ -39,7 +39,11 @@ class WishlistContainer extends Component {
     const { wishes, loading, error, onAddedToCart } = this.props;
 
     if (loading) {
-      return <Spinner />;
+      return <LoadingSpinner />;
+    }
+
+    if (error) {
+      return <ErrorIndicator />
     }
 
     return <Wishlist wishes={wishes} onAddedToCart={onAddedToCart}/>;
