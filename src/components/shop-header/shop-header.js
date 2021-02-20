@@ -2,12 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const ShopHeader = ({ numItems, total }) => {
+const ShopHeader = ({ total, numItems }) => {
   return (
     <header>
-      <Link to="/">
-        <div>Back </div>
-      </Link>
       <Link to="/cart">
           {numItems} items (${total})
       </Link>
@@ -16,11 +13,17 @@ const ShopHeader = ({ numItems, total }) => {
 };
 
 
-const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal }}) => {
+const mapStateToProps = ({ shoppingCart: { cartItems }}) => {
+  if (cartItems.length>0){
   return {
-    numItems: cartItems.length,
-    total: orderTotal
+    numItems: cartItems.map(item => item.count).reduce((t, a) => parseInt(t) + parseInt(a)),
+    total: cartItems.map(item => item.total).reduce((t, a) => parseInt(t) + parseInt(a))
+    }
+  }
+  else return {
+    numItems: 0,
+    total:0
+  }
   };
-};
 
 export default connect(mapStateToProps)(ShopHeader);

@@ -8,6 +8,7 @@ const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
   if (totalForOrder.length>0) {
     totalForOrder = totalForOrder.reduce((t, a) => parseInt(t) + parseInt(a))
   }
+  else totalForOrder = 0;
   const renderRow = (item, idx) => {
     const { id, title, count, total, price } = item;
     return (
