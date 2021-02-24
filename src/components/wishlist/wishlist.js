@@ -13,19 +13,23 @@ import ErrorIndicator from '../error-indicator/error-indicator';
 
 const Wishlist = ({ wishes, onAddedToCart }) => {
   return (
-    <ul className="list-group">
+    <>
+    <div className="container"> 
+    <div className="row justify-content-center">
       {
         wishes.map((wish) => {
           return (
-            <li key={wish.id}>
+            <div className="col-4" key={wish.id}>
               <WishlistItem
                 wish={wish}
                 onAddedToCart={() => onAddedToCart(wish.id)}/>
-            </li>
+            </div>
           );
         })
       }
-    </ul>
+    </div>
+    </div>
+    </>
   );
 };
 
