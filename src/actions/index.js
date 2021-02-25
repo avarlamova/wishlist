@@ -39,6 +39,12 @@ export const allRemovedFromCart = (wishId) => {
   };
 };
 
+export const clearCart = () => {
+  return {
+    type: 'CLEAR_CART',
+  }
+}
+
 const fetchWishlist = (wishlistService) => () => (dispatch) => {
   dispatch(wishlistRequested());
   wishlistService.getWishlist()

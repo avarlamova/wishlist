@@ -73,9 +73,18 @@ const updateShoppingCart = (state, action) => {
     case 'ALL_REMOVED_FROM_CART':
       const item = state.shoppingCart.cartItems.find(({id}) => id === action.payload);
       return updateOrder(state, action.payload, -item.count);
-
+    
+    case 'CLEAR_CART':
+      /*
+      return {
+        cartItems: [],
+        orderTotal: 0
+      }*/
+      console.log('cleared');
+      break;
+    
     default:
-      return state.shoppingCart;
+    return state.shoppingCart;
   }
 };
 

@@ -15,11 +15,11 @@ const Wishlist = ({ wishes, onAddedToCart }) => {
   return (
     <>
     <div className="container"> 
-    <div className="row justify-content-center">
+    <div className="row justify-content-around">
       {
         wishes.map((wish) => {
           return (
-            <div className="col-4" key={wish.id}>
+            <div className="col-6" key={wish.id}>
               <WishlistItem
                 wish={wish}
                 onAddedToCart={() => onAddedToCart(wish.id)}/>

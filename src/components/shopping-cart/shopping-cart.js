@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import icon from './favicon-16x16.png';
 
-import {wishAddedToCart,wishRemovedFromCart, allRemovedFromCart } from '../../actions';
+import {wishAddedToCart,wishRemovedFromCart, allRemovedFromCart, clearCart } from '../../actions';
 
 const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
   let totalForOrder = items.map(item => item.total);
@@ -19,21 +20,23 @@ const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
         <td>${price}</td>
         <td>${total}</td>
         <td>
+          <div role="group" className="btn-btn-group-sm">
           <button
             onClick={() => onIncrease(id)}
-            className="btn btn-outline-success btn-sm float-right">
+            className="btn btn-outline-success float-right">
             +
           </button>
           <button
             onClick={() => onDecrease(id)}
-            className="btn btn-outline-warning btn-sm float-right">
+            className="btn btn-outline-warning float-right">
             -
           </button>
           <button
             onClick={() => onDelete(id)}
-            className="btn btn-outline-danger btn-sm float-right">
-            Delete
+            className="btn float-right">
+            <img alt='Delete' style={{width: 24.4, height: 31, marginLeft:0, paddingLeft:0}} src={icon}></img>
           </button>
+          </div>
         </td>
       </tr>
     );
@@ -41,7 +44,7 @@ const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
 
   return (
     <div className="shopping-cart-table">
-      <h2>Your Order</h2>
+      <h3>Your Order</h3>
       <table className="table">
         <thead>
           <tr>
@@ -58,9 +61,13 @@ const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
         </tbody>
       </table>
 
-      <div>
+     <button className="btn btn-secondary btn-sm" onClick={clearCart}> 
+      Clear the cart 
+      </button> 
+
+      <h4>
         Total: $ {totalForOrder}
-      </div>
+      </h4>
     </div>
   );
 };
@@ -74,7 +81,8 @@ const mapStateToProps = ({ shoppingCart: { cartItems }}) => {
 const mapDispatchToProps = {
   onIncrease: wishAddedToCart,
   onDecrease: wishRemovedFromCart,
-  onDelete: allRemovedFromCart
+  onDelete: allRemovedFromCart,
+  clearCart: clearCart
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable);

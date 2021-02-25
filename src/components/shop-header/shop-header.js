@@ -6,7 +6,7 @@ const ShopHeader = ({ total, numItems }) => {
   return (
     <header>
       <Link to="/cart">
-          {numItems} items (${total})
+          {numItems} items in your cart (${total})
       </Link>
     </header>
   );
