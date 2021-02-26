@@ -75,13 +75,10 @@ const updateShoppingCart = (state, action) => {
       return updateOrder(state, action.payload, -item.count);
     
     case 'CLEAR_CART':
-      /*
       return {
         cartItems: [],
         orderTotal: 0
-      }*/
-      console.log('cleared');
-      break;
+      };
     
     default:
     return state.shoppingCart;

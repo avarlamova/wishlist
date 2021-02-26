@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import icon from './favicon-16x16.png';
+import './shopping-cart.css';
 
 import {wishAddedToCart,wishRemovedFromCart, allRemovedFromCart, clearCart } from '../../actions';
 
-const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
+const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete, clearCart }) => {
   let totalForOrder = items.map(item => item.total);
   if (totalForOrder.length>0) {
     totalForOrder = totalForOrder.reduce((t, a) => parseInt(t) + parseInt(a))
@@ -34,7 +35,7 @@ const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
           <button
             onClick={() => onDelete(id)}
             className="btn float-right">
-            <img alt='Delete' style={{width: 24.4, height: 31, marginLeft:0, paddingLeft:0}} src={icon}></img>
+            <img className="delete-btn" alt='Delete' src={icon}></img>
           </button>
           </div>
         </td>
@@ -61,7 +62,7 @@ const ShoppingCartTable = ({ items, onIncrease, onDecrease, onDelete }) => {
         </tbody>
       </table>
 
-     <button className="btn btn-secondary btn-sm" onClick={clearCart}> 
+     <button className="btn btn-secondary btn-sm clear-btn" onClick={clearCart}> 
       Clear the cart 
       </button> 
 
